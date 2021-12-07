@@ -1,8 +1,17 @@
+/**
+ * @name Background
+ * @author Commandcracker
+ * @authorLink https://github.com/Commandcracker
+ * @version 1.0.0
+ * @description Just a simple Background
+ * @source https://github.com/Commandcracker/Better-Discord-Background
+ */
+
 /* Background Image */
 #app-mount {
-	background: url(URL);
- 	background-repeat: no-repeat;
- 	background-size: cover;
+  background: url(URL);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .wrapper-3NnKdC  /* Server List */,
