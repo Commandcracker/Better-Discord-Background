@@ -1,0 +1,41 @@
+/* Background Image */
+#app-mount {
+	background: url(URL);
+ 	background-repeat: no-repeat;
+ 	background-size: cover;
+}
+
+.wrapper-3NnKdC  /* Server List */,
+.scroller-1Bvpku /* Server List */,
+.app-2rEoOp /* Everything */,
+.theme-dark  .container-1D34oG /* Friends */,
+.theme-light .container-1D34oG /* Friends */ {
+  background-color: transparent;
+}
+
+/* Everything / Theme */
+.theme-dark, .theme-light {
+  /*change last value from 0.0-1.0 to adjust brightness*/
+  --background-tertiary: rgba(25, 25, 25, 0.70); 
+  --background-primary: transparent;
+  --background-secondary: transparent;
+  --background-secondary-alt: transparent;
+  --channeltextarea-background: transparent;
+}
+
+/* Nitro */
+.applicationStore-1pNvnv {
+  background-color: transparent;
+}
+
+/* Now Playing / Active Now */
+/* Hover Card */
+.theme-dark  .outer-1AjyKL.interactive-3B9GmY:hover,
+.theme-light .outer-1AjyKL.interactive-3B9GmY:hover {
+  background-color: transparent;
+}
+/*  Card background */
+.theme-dark  .inset-3sAvek,
+.theme-light .inset-3sAvek {
+  background-color: transparent;
+}
