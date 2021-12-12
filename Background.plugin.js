@@ -183,15 +183,23 @@ module.exports = (() => {
 
             /* Now Playing / Active Now */
             /* Hover Card */
-            #app-mount .outer-1AjyKL.interactive-3B9GmY:hover {
-              background-color: transparent;
+            .theme-dark .outer-1AjyKL.active-1xchHY,
+            .theme-dark .outer-1AjyKL.interactive-3B9GmY:hover {
+                background-color: rgba(24, 25, 28, 0.25);
+            }
+            .theme-light .outer-1AjyKL.active-1xchHY,
+            .theme-light .outer-1AjyKL.interactive-3B9GmY:hover {
+                background-color: rgba(242, 243, 245, 0.2);
             }
 
             /* Card background */
-            #app-mount .inset-3sAvek {
-              background-color: transparent;
+            .theme-dark .inset-3sAvek {
+              background-color: rgba(47, 49, 54, 0.25);
             }
-
+            .theme-light .inset-3sAvek {
+              background-color: rgba(235, 237, 239, 0.25);
+            }
+            
             /* Call background */
             .wrapper-2qzCYF.minimum-28Z35l  {
               background-color: transparent;
@@ -227,14 +235,24 @@ module.exports = (() => {
               filter: brightness(`+this.settings.effects.brightness+`%) opacity(`+this.settings.effects.opacity+`%) saturate(`+this.settings.effects.saturation+`%);
             }
 
-            /* Everything / Theme */
-            #app-mount {
-              /*change last value from 0.0-1.0 to adjust brightness*/
-              --background-tertiary: rgba(25, 25, 25, 0.70); 
-              --background-primary: transparent;
-              --background-secondary: transparent;
-              --background-secondary-alt: transparent;
-              --channeltextarea-background: transparent;
+            .theme-dark {
+                --background-primary:         rgba(54, 57, 63, 0);
+                --background-secondary:       rgba(47, 49, 54, 0.25);
+                --background-secondary-alt:   rgba(41, 43, 47, 0.25);
+                --background-tertiary:        rgba(32, 34, 37, 0.25);
+                --channeltextarea-background: rgba(64, 68, 75, 0.25);
+                --scrollbar-auto-track: hsl(210,calc(var(--saturation-factor, 1)*9.8%),20%,.5);
+                --background-floating: rgba(24, 25, 28, 0.5);
+            }
+  
+            .theme-light {
+                --background-primary:         rgba(255, 255, 255, 0);
+                --background-secondary:       rgba(242, 243, 245, 0.25);
+                --background-secondary-alt:   rgba(235, 237, 239, 0.25);
+                --background-tertiary:        rgba(227, 229, 232, 0.25);
+                --channeltextarea-background: rgba(235, 237, 239, 0.25);
+                --scrollbar-auto-track: rgba(242, 242, 242, 0.5);
+                --background-floating: rgba(255, 255, 255, 0.5);
             }`
 
           if (isYoutube) {
@@ -265,8 +283,16 @@ module.exports = (() => {
 
             if (isYoutube) {
               var videolink = this.settings.backgroundLink
+
+              if (videolink.search("playlist?") > -1) {
+                let videoPL = videolink.substring(videolink.search("playlist") + 14, videolink.length);
+                videolink = videolink.replace("playlist?list=", "embed/videoseries?list=");
+                videolink = "https://www.youtube-nocookie.com/embed/videoseries?list=";
+                videolink += videoPL;
+                videolink += "&controls=0&iv_load_policy=3&mute=1&showinfo=0&rel=0&autoplay=1&loop=1";
+              }
+
               if (videolink.search("watch") > -1) {
-                console.log("Youtube Background: loading single video!");
                 let videoID = videolink.substring(videolink.search("watch") + 8, videolink.search("watch") + 19);
                 videolink = "https://www.youtube-nocookie.com/embed/";
                 videolink += videoID;
