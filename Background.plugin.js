@@ -2,7 +2,7 @@
  * @name Background
  * @author Commandcracker
  * @authorLink https://github.com/Commandcracker
- * @version 1.0.0
+ * @version 1.0.1
  * @description Just a simple Background
  * @source https://github.com/Commandcracker/Better-Discord-Background
  * @updateUrl https://raw.githubusercontent.com/Commandcracker/Better-Discord-Background/main/Background.plugin.js
@@ -44,7 +44,7 @@ module.exports = (() => {
           //twitter_username: "Commandcracker"
         }
       ],
-      version: "1.0.0",
+      version: "1.0.1",
       description: "Just a simple Background",
       github: "https://github.com/Commandcracker/Better-Discord-Background",
       github_raw: "https://raw.githubusercontent.com/Commandcracker/Better-Discord-Background/main/Background.plugin.js"
