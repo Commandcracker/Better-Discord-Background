@@ -2,7 +2,7 @@
  * @name Background
  * @author Commandcracker
  * @authorLink https://github.com/Commandcracker
- * @version 1.0.1
+ * @version 1.0.2
  * @description Just a simple Background
  * @source https://github.com/Commandcracker/Better-Discord-Background
  * @updateUrl https://raw.githubusercontent.com/Commandcracker/Better-Discord-Background/main/Background.plugin.js
@@ -44,7 +44,7 @@ module.exports = (() => {
           //twitter_username: "Commandcracker"
         }
       ],
-      version: "1.0.1",
+      version: "1.0.2",
       description: "Just a simple Background",
       github: "https://github.com/Commandcracker/Better-Discord-Background",
       github_raw: "https://raw.githubusercontent.com/Commandcracker/Better-Discord-Background/main/Background.plugin.js"
@@ -133,51 +133,83 @@ module.exports = (() => {
     stop() { }
   } : (([Plugin, Api]) => {
     const plugin = (Plugin, Api) => {
-      const VideoElementIdentifier = "Commandcracker-Background"
+
+      const randomString = (length = 8) => {
+          // Declare all characters
+          let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      
+          // Pick characers randomly
+          let str = '';
+          for (let i = 0; i < length; i++) {
+              str += chars.charAt(Math.floor(Math.random() * chars.length));
+          }
+      
+          return str;
+      };
+      
+      const Identifier = {
+        "Random": randomString(16),
+        "Prefix": "Background-Commandcracker"
+      };
+
+      const buildTag = (tag) => {
+        return Identifier.Prefix + '-' + Identifier.Random + '-' + tag
+      }
+
       return class Background extends Plugin {
 
         injectBackground() {
           const isYoutube = new RegExp('^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$').exec(this.settings.backgroundLink) != null
 
           var BackgroundCSS = `
-            /* Transparency */
-
+            /**
+             * @name ThemeFixer
+             * @description ThemeFixerCSS for transparent themes
+             * @author DevilBro
+             * @version 1.0.3
+             * @authorId 278543574059057154
+             * @invite Jx3TjNS
+             * @donate https://www.paypal.me/MircoWittrien
+             * @patreon https://www.patreon.com/MircoWittrien
+             */
+            
             body,
             #app-mount,
-            #app-mount .app-1q1i1E,
-            #app-mount .app-2rEoOp /* Everything */,
-            #app-mount .container-16j22k.fixClipping-3qAKRb,
-            #app-mount .wrapper-1prNyd,
-            #app-mount .bg-h5JY_x,
-            #app-mount .layer-3QrUeG,
-            #app-mount .container-3w7J-x,
-            #app-mount .privateChannels-1nO12o,
-            #app-mount .panels-j1Uci_ > *,
-            #app-mount .chat-3bRxxu,
-            #app-mount .wrapper-3vR61M,
-            #app-mount .noChat-9aipKz,
-            #app-mount .members-1998pB,
-            #app-mount .members-1998pB > div,
-            #app-mount .container-1D34oG /* Friends */,
-            #app-mount .applicationStore-1pNvnv /* Nitro */,
-            #app-mount .pageWrapper-1PgVDX,
-            #app-mount .scrollerBase-289Jih,
-            #app-mount .standardSidebarView-3F1I7i,
-            #app-mount .contentRegion-3nDuYy {
+            #app-mount .app-3xd6d0,
+            #app-mount .app-2CXKsg,
+            #app-mount .container-2RRFHK.fixClipping-3GOd_d,
+            #app-mount .wrapper-3AZUiP,
+            #app-mount .bg-1QIAus,
+            #app-mount .layer-86YKbF,
+            #app-mount .container-1NXEtd,
+            #app-mount .privateChannels-oVe7HL,
+            #app-mount .panels-3wFtMD > *,
+            #app-mount .chat-2ZfjoI,
+            #app-mount .container-3XgAHv,
+            #app-mount .wrapper-3HVHpV,
+            #app-mount .noChat-sb1z07,
+            #app-mount .members-3WRCEx,
+            #app-mount .members-3WRCEx > div,
+            #app-mount .container-2cd8Mz,
+            #app-mount .applicationStore-2nk7Lo,
+            #app-mount .pageWrapper-2PwDoS,
+            #app-mount .scrollerBase-_bVAAt,
+            #app-mount .standardSidebarView-E9Pc3j,
+            #app-mount .contentRegion-3HkfJJ {
               background-color: transparent;
             }
-            #app-mount .children-19S4PO:after {
+            #app-mount .children-3xh0VB:after {
               display: none;
             }
-            #app-mount .wrapper-3NnKdC /* Server List */ {
+            #app-mount .wrapper-1_HaEi {
               background-color: rgba(0, 0, 0, 0.3);
             }
-            #app-mount .container-1r6BKw.themed-ANHk51,
-            #app-mount .sidebarRegion-VFTUkN,
-            #app-mount .sidebar-2K8pFh,
-            #app-mount .panels-j1Uci_,
-            #app-mount .membersWrap-2h-GB4,
-            #app-mount .nowPlayingColumn-2sl4cE {
+            #app-mount .container-ZMc96U.themed-Hp1KC_,
+            #app-mount .sidebarRegion-1VBisG,
+            #app-mount .sidebar-1tnWFu,
+            #app-mount .panels-3wFtMD,
+            #app-mount .membersWrap-3NUR2t,
+            #app-mount .nowPlayingColumn-1eCBCN {
               background-color: rgba(0, 0, 0, 0.2);
             }
 
@@ -217,7 +249,7 @@ module.exports = (() => {
             }
 
             /* Background Video */
-            .`+ VideoElementIdentifier + ` {
+            .`+ buildTag("Video") +` {
               background: url("`+ this.settings.backgroundLink + `");
               background-repeat: no-repeat;
               background-size: cover;
@@ -259,14 +291,14 @@ module.exports = (() => {
             BackgroundCSS += `
 
             @media (min-aspect-ratio: 16/9) {
-              .`+ VideoElementIdentifier + ` {
+              .`+ buildTag("Video") + ` {
                 height: 300%;
                 top: -100%;
               }
             }
             
             @media (max-aspect-ratio: 16/9) {
-              .`+ VideoElementIdentifier + ` {
+              .`+ buildTag("Video") + ` {
                 width: 300%;
                 left: -100%;
               }
@@ -274,11 +306,11 @@ module.exports = (() => {
           }
 
           const style = document.createElement('style');
-          style.id = "extra-css"
+          style.id = buildTag("CSS")
           style.innerHTML = BackgroundCSS
           document.head.appendChild(style);
 
-          if (document.getElementsByClassName(VideoElementIdentifier).length == 0) {
+          if (document.getElementsByClassName(buildTag("Video")).length == 0) {
             var AppMount = document.getElementById("app-mount");
 
             if (isYoutube) {
@@ -301,17 +333,17 @@ module.exports = (() => {
               }
 
               var VideoElement = document.createElement("iframe");
-              VideoElement.id = VideoElementIdentifier;
-              VideoElement.className = VideoElementIdentifier;
-              VideoElement.src = videolink;
+              VideoElement.id         = buildTag("Video");
+              VideoElement.className  = buildTag("Video");
+              VideoElement.src        = videolink;
 
               AppMount.insertAdjacentElement("beforeend", VideoElement);
 
             } else {
               
               var VideoElement        = document.createElement("video");
-              VideoElement.id         = VideoElementIdentifier;
-              VideoElement.className  = VideoElementIdentifier;
+              VideoElement.id         = buildTag("Video");
+              VideoElement.className  = buildTag("Video");
               VideoElement.muted      = true;
               VideoElement.loop       = true;
               VideoElement.autoplay   = true;
@@ -323,10 +355,10 @@ module.exports = (() => {
         }
 
         deleteBackground() {
-          var elem = document.querySelector("#" + VideoElementIdentifier);
+          var elem = document.querySelector("#" + buildTag("Video"));
           elem.parentNode.removeChild(elem);
 
-          var elem = document.querySelector("#extra-css");
+          var elem = document.querySelector("#" + buildTag("CSS"));
           elem.parentNode.removeChild(elem);
         }
 
